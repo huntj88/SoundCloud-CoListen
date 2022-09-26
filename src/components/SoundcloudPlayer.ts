@@ -1,8 +1,11 @@
 import { IMediaPlayer } from "@microsoft/live-share-media";
-import { SCPlay } from "./createWidget";
+import { SCPlay } from "./integrationUtils";
 
 export class SoundcloudPlayer implements IMediaPlayer {
     
+    // https://developers.soundcloud.com/docs/api/html5-widget
+    private _player: any;
+
     private _position: number = 0;
     private _duration: number = 0;
     private _paused: boolean = true;
@@ -30,11 +33,9 @@ export class SoundcloudPlayer implements IMediaPlayer {
           }, 20)
     }
 
-    private _player: any;
-
     public get currentSrc(): string {
         console.log("sc", "current source")
-        return "";
+        return "TODO";
     }
     public get currentTime(): number {
         console.log("sc", "current time")
@@ -48,7 +49,7 @@ export class SoundcloudPlayer implements IMediaPlayer {
 
     public get src(): string {
         // console.log("sc", "src")
-        return ""
+        return "TODO"
     }
     public get duration(): number {
         // console.log("sc", "duration")
@@ -99,7 +100,10 @@ export class SoundcloudPlayer implements IMediaPlayer {
         // TODO: map other event types
     }
     removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions | undefined): void {
-        // throw new Error("Method not implemented.");
+        if (type === "playing") {
+            this._player.unbind(SCPlay())
+        }
+        // TODO: map other event types
     }
 
     public play(): Promise<void> {
@@ -116,7 +120,6 @@ export class SoundcloudPlayer implements IMediaPlayer {
 
 function isEventListenerObject(pet: EventListener | EventListenerObject): pet is EventListenerObject {
     return (pet as EventListenerObject).handleEvent !== undefined;
-    // return (<EventListenerObject>pet).handleEvent !== undefined;
 }
 
 function isEventListener(pet: EventListener | EventListenerObject): pet is EventListener {

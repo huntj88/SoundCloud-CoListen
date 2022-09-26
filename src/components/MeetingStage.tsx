@@ -6,7 +6,7 @@ import { inTeams } from "../inTeams";
 // import Soundcloud from "./Soundcloud";
 import { EphemeralMediaSession, MediaPlayerSynchronizer } from "@microsoft/live-share-media";
 import { SoundcloudPlayer } from "./SoundcloudPlayer";
-import { createWidget } from "./createWidget";
+import { createWidget } from "./integrationUtils";
 
 function MeetingStage() {
   // MediaSynchronizer ref
