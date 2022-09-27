@@ -44,6 +44,16 @@ export class SoundcloudPlayer implements IMediaPlayer {
 
     public set currentTime(value: number) {
         console.log("sc", "set current time")
+
+        // if (this._paused) {
+        //     this._player.seekTo(value)
+        //     console.log("seek", "pausing")
+        //     this.pause()
+        // } else {
+        //     this._player.seekTo(value)
+        // }
+        
+        // will cause player to play
         this._player.seekTo(value)
     }
 

@@ -3,7 +3,6 @@ import { ITeamsFluidClientOptions, TeamsFluidClient } from "@microsoft/live-shar
 import { AzureConnectionConfig, ITelemetryBaseEvent, ITelemetryBaseLogger } from "@fluidframework/azure-client";
 import { InsecureTokenProvider } from "@fluidframework/test-client-utils";
 import { inTeams } from "../inTeams";
-// import Soundcloud from "./Soundcloud";
 import { EphemeralMediaSession, MediaPlayerSynchronizer } from "@microsoft/live-share-media";
 import { SoundcloudPlayer } from "./SoundcloudPlayer";
 import { createWidget } from "./integrationUtils";
@@ -51,6 +50,22 @@ function MeetingStage() {
 
         createWidget(document.getElementsByClassName("soundcloudIFrame")[0], async (scControls: any) => {
           synchronizer.current = typedMediaSession?.synchronize(new SoundcloudPlayer(scControls));
+          // synchronizer.current?.addEventListener(
+          //   MediaPlayerSynchronizerEvents.groupaction,
+          //   (evt) => {
+          //     if (
+          //       evt.details.action === "play" &&
+          //       evt.error?.name === "NotAllowedError"
+          //     ) {
+          //       // The user has not interacted with the document so the browser blocked the play action
+          //       // mute the player and try again
+          //       synchronizer.current!.player.muted = true;
+          //       synchronizer.current!.player.play();
+          //     } else if (evt.error) {
+          //       console.error(evt.error);
+          //     }
+          //   }
+          // );
           await typedMediaSession?.initialize();
         });
 
